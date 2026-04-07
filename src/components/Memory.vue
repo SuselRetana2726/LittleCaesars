@@ -11,11 +11,12 @@
       <div class="area-juego">
         <div class="tablero">
           <div v-for="(carta, index) in cartas" :key="index" class="carta" @click="voltearCarta(index)"
-            :class="{ mezclando: mezclando }" :style="mezclando ? ` animation-delay: ${index * 0.06}s;
-              --dx: ${(Math.random() * 40 - 20)}vw;
-              --dy: ${(Math.random() * 40 - 20)}vh;
-              --rot: ${(Math.random() * 40 - 20)}deg;
-            ` : ''">
+            :class="{ mezclando: mezclando }" :style="mezclando ? {
+              '--dx': carta.dx + 'px',
+              '--dy': carta.dy + 'px',
+              '--rot': carta.rot + 'deg',
+              animationDelay: (index * 0.06) + 's'
+            } : {}">
             <div class="card-inner" :class="{ girada: carta.volteada || carta.encontrada }">
               <div class="card-front">
                 <img src="/images/card.png" alt="Reverso" />
@@ -111,12 +112,22 @@ export default {
       this.reiniciarJuego();
     },
     generarCartas() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
       const valoresBase = ['card1','card2','card3','card4','card5','card6'];
       const valores = [...valoresBase, ...valoresBase];
-      const mezcladas = valores
-        .map(valor => ({ valor, volteada: false, encontrada: false }))
+
+      return valores
+        .map(valor => ({
+          valor,
+          volteada: false,
+          encontrada: false,
+          dx: (Math.random() * 0.4 - 0.2) * width,
+          dy: (Math.random() * 0.4 - 0.2) * height,
+          rot: (Math.random() * 20 - 10)
+        }))
         .sort(() => 0.5 - Math.random());
-      return mezcladas;
     },
     voltearCarta(index) {
       if (this.ganaste || this.perdiste) return;
@@ -258,16 +269,13 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   width: min(90vw, 90vh);
   flex-grow: 2;
+  perspective: 1000px;
 }
 
-.carta {
-  perspective: 1000px;
+.carta {  
   width: 100%;
   aspect-ratio: 3.5/5;
   padding: 0.3vh;
-
-  transform-style: preserve-3d;
-  will-change: transform
 }
 
 .card-inner {
@@ -278,6 +286,7 @@ export default {
   transform-style: preserve-3d;  
   border-radius: 1vh;
   background: transparent;
+  transform: translateZ(0);
 }
 
 .card-inner.girada {
@@ -301,7 +310,8 @@ export default {
 
   background: transparent;
 
-  filter: drop-shadow(0 0.2vh 0.8vh rgba(0,0,0,0.7));
+  /*filter: drop-shadow(0 0.2vh 0.8vh rgba(0,0,0,0.7));*/
+  filter: drop-shadow(0 0.1vh 0.3vh rgba(0,0,0,0.5));
   
 }
 
@@ -327,35 +337,31 @@ export default {
 }
 
 .mezclando {
-    animation: shuffleCasinoPro 1s cubic-bezier(0.3, 1.3, 0.4, 1) forwards;
+    animation: shuffleCasinoPro 0.5s cubic-bezier(0.3, 1.3, 0.4, 1) forwards;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 @keyframes shuffleCasinoPro {
   0% {
     transform: translate(0, 0) scale(1) rotate(0deg);
-    z-index: 1;
   }
 
-  /* Se juntan al centro */
   25% {
-    transform: translate(var(--dx), var(--dy)) scale(0.6) rotate(var(--rot));
-    z-index: 10;
+    transform: translate(var(--dx), var(--dy)) scale(0.8) rotate(var(--rot));
   }
 
-  /* Cruce tipo riffle */
   50% {
-    transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -1)) scale(0.6) rotate(calc(var(--rot) * -1));
+    transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -1)) scale(0.8) rotate(calc(var(--rot) * -1));
   }
 
-  /* Expansión */
   75% {
-    transform: translate(0, 0) scale(1.08) rotate(2deg);
+    transform: translate(0, 0) scale(1.02) rotate(2deg);
   }
 
   /* Normal */
   100% {
     transform: translate(0, 0) scale(1) rotate(0deg);
-    z-index: 1;
   }
 }
 
