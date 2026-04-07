@@ -277,7 +277,6 @@ export default {
   width: 100%;
   aspect-ratio: 3.5/5;
   padding: 0.3vh;
-  filter: drop-shadow(0 0.1vh 0.3vh rgba(0,0,0,0.5));
 }
 
 .card-inner {

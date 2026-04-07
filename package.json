@@ -13,6 +13,9 @@
     "electron": "electron electron.js"
   },
   "dependencies": {
+    "@capacitor/android": "^8.3.0",
+    "@capacitor/cli": "^8.3.0",
+    "@capacitor/core": "^8.3.0",
     "gsap": "^3.13.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
@@ -36,7 +39,10 @@
       "buildResources": "assets"
     },
     "win": {
-      "target": ["nsis", "portable"]
+      "target": [
+        "nsis",
+        "portable"
+      ]
     }
   }
 }
