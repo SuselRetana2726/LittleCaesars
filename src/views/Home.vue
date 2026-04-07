@@ -3,7 +3,7 @@
     <div class="contenido">
       <img src="/images/logo.png" alt="Logo Little Caesars" class="logo-img" />
       <img src="/images/titulohome.png" alt="Título del juego" class="titulo-img" />
-      <img src="/images/60-seg-home.png" alt="60 Segundos" class="seg-home-img" />
+      <h1 class="titulo">TIENES 30 SEGUNDOS</h1>
       <div class="insignia-contenedor">
         <img src="/images/insignia-home.png" alt="Insignia" class="insignia-img" />
         <div class="botones">
@@ -45,7 +45,6 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
 .contenido {
   width: 100%;
   max-width: 45vh;
@@ -55,8 +54,13 @@ export default {
   justify-content: space-between;
   height: 89vh;
   box-sizing: border-box;
-  text-align: center;
-  color: white;  
+  text-align: center;  
+}
+.contenido .titulo {
+  color: #1A1413;
+  font-family: 'EmigreTitulo', sans-serif !important;
+  font-size: 4vh;
+  margin-top: 1vh;
 }
 
 .titulo-img {
@@ -64,17 +68,12 @@ export default {
   margin-top: 3rem;
 }
 
-
-.seg-home-img {
-  margin-top: 1.5vh;
-}
-
 .insignia-contenedor {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 123%;
+  width: 115%;
 }
 
 .insignia-img {
@@ -108,24 +107,22 @@ export default {
 @media (max-width: 480px) {
   .contenido {
     height: 95vh;
-    padding: 1.5rem 1rem;
+    padding: 1rem 1rem;
   }
 
   .titulo-img {
     max-width: 70%;
-    margin-bottom: -3rem;
-    margin-top: -3rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
   }
 
    .logo-img {
     max-width: 85%;
-  }
-
-  .seg-home-img {
-    max-width: 60%;
+    margin-top: 2rem;
   }
 
    .insignia-contenedor {
+    margin-top: 3.5rem;
     width: 110%;
   }
 
@@ -140,7 +137,7 @@ export default {
     bottom: 10%; /* ajusta esto según dónde lo quieras */
     left: 50%;
     font-size: 4.5vh; /* más pequeño */
-    margin-bottom: -5vh;
+    margin-bottom: -2vh;
     border-radius: 15px;
   }
 

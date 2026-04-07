@@ -73,7 +73,7 @@ export default {
       primeraCarta: null,
       segundaCarta: null,
       bloqueo: false,
-      tiempo: 60,
+      tiempo: 30,
       temporizador: null,
       ganaste: false,
       perdiste: false,
@@ -175,7 +175,7 @@ export default {
       this.primeraCarta = null;
       this.segundaCarta = null;
       this.bloqueo = true;
-      this.tiempo = 60;
+      this.tiempo = 30;
       this.ganaste = false;
       this.perdiste = false;
       this.parejasEncontradas = 0;
