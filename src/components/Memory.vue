@@ -270,12 +270,14 @@ export default {
   width: min(90vw, 90vh);
   flex-grow: 2;
   perspective: 1000px;
+  
 }
 
 .carta {  
   width: 100%;
   aspect-ratio: 3.5/5;
   padding: 0.3vh;
+  filter: drop-shadow(0 0.1vh 0.3vh rgba(0,0,0,0.5));
 }
 
 .card-inner {
@@ -309,9 +311,6 @@ export default {
   background-repeat: no-repeat;
 
   background: transparent;
-
-  /*filter: drop-shadow(0 0.2vh 0.8vh rgba(0,0,0,0.7));*/
-  filter: drop-shadow(0 0.1vh 0.3vh rgba(0,0,0,0.5));
   
 }
 
@@ -340,6 +339,7 @@ export default {
     animation: shuffleCasinoPro 0.5s cubic-bezier(0.3, 1.3, 0.4, 1) forwards;
     will-change: transform;
     transform: translateZ(0);
+    animation-timing-function: linear;
 }
 
 @keyframes shuffleCasinoPro {
